@@ -1,0 +1,12 @@
+Today I set up my own blog here!
+This is a post about the process of my set up, symobelly, a tutorial of creating blogs via github and Jekll. Now let's begin!
+
+My setup is based on the offical site <url value="https://pages.github.com">GitHub Pages</url>, let's make it step by step.
+
+1 Create a repository on GitHub
+  The name must be username.github.io,where username is your username(or organization name) on GitHub.
+  You should note that the username is the name you use in your GitHub,otherwise it won't work.
+1 Clone the repository to your local computer
+  Set up a new folder as to save the repository and open shell to clone:
+    <itaric>git clone https://github.com/username/username/github.io</itaric>
+
