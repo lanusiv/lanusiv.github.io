@@ -1,0 +1,76 @@
+Today I set up my own blog here!
+This is a post about the process of my set up, symobelly, a tutorial of creating blogs via github and Jekyll. Now let's begin!
+
+My setup is based on the offical site <url value="https://pages.github.com">GitHub Pages</url>, let's make it step by step.
+
+1 Create a repository on GitHub
+  The name must be username.github.io,where username is your username(or organization name) on GitHub.
+  You should note that the username is the name you use in your GitHub,otherwise it won't work.
+2 Clone the repository to your local computer
+  Set up a new folder as to save the repository and open shell to clone:
+    <itaric>git clone https://github.com/username/username/github.io</itaric>
+3 Commit,push file as common Repositories
+  Like other repositories, this repository is just common as with others.Now let's commit a new file:
+  cd username.github.io
+  echo "Hello World" > index.html
+  git add --all (or git add . , or git add [file list])
+  git commit -m "Initial commit"
+  git push -u origin master
+ Tips: You may have to enter your username and password on every commit, which is too trouble.To solve this, one way is to config git to remember your password temporoly:
+  git config --global credential.helper cache
+  # set git to use the credential memory cache
+ the default duration for cache is 15minutes, you can change the timeout by execute this;
+  git config --global credential.helper 'cache --timeout=3600'
+  # set the cache to timeout after 1 hour (setting is in seconds)
+
+4 Go to the web you just created
+  Open your web brower and type the url "http://username/github.io" and strike enter, you will see your page.
+
+Generally, its over for you to post your own blog on GitHub, and everyone can read it. But what's more, there is a problem that you have to edit the web page all by yourself, not just the content of the post! So next, let's go on to set up a tool for editing the post for us. Here is "Jekyll".
+
+5 Install Ruby
+  To install Jekyll, Ruby is required,so first install Ruby(my system is ubuntu, you can refer to Installations of Ruby via https://www.ruby-lang.org/en/documentation/installation):
+   1) sudo apt-get install ruby-full
+   2) install Jekyll
+      as in our country, the bitch GFW blocks the ruby souces, we need to do more things in order to install successfully.
+      extras: change ruby gem source:
+              sudo gem sources --remove https://rubygems.org/ (or https)
+              sudo gem sources -a https://ruby.taobao.org/  (or https)
+              
+      sudo gem intall jekyll (-V)
+---------------------
+Wait, there was a probolem when I install Ruby on Ubuntu using apt-get: the latest version on the source is 1.9.1, but the instruction requires the version at least 2.0.0.
+As I ignored this matter and went on, I met a trouble, I couldn't run 'Jekyll build --watch' successfully and go to next step. Finally, I have to reread the instruction and google search the isuee, I found the right way. Here is What to do:
+  1) remove the previously installed ruby by run 'sudo apt-get autoremove ruby',
+  2) install RVM, 
+      $ curl -L https://get.rvm.io | bash -s stable
+      Note: if you are prompted this error:"curl: (7) Failed to connect to get.rvm.io port 443: 网络不可达",try this: echo ipv4 >> ~/.curlrc
+  3) load rvm,
+      $ source ~/.rvm/scripts/rvm
+  4) check if install succeeded,
+      $ rvm -v
+      # rvm 1.26.11 (latest) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <mpapis@gmail.com> [https://rvm.io/]
+  5) install Ruby by using RVM, you may wait for serval to tens of minutes,
+      $ rvm install 2.2.2
+      # 2.2.2 is the latest version since then
+  6) set the default Ruby version,
+      $ rvm 2.2.2 --default
+  7) check Ruby version,
+      $ ruby -v
+      $ gem -v
+  8) after that, you may need to isntall rails, though it may not necessary, as a new comer to Ruby's world, I choose to install anyway,
+     $ gem install rails
+     after,check if succeed
+     $ rails -v
+  9) now we are done installing ruby, let's go back and continue our blog set ups.
+
+6 Install Bundler
+  Bundler is a package manager that makes versioning Ruby software luke Jekyll a lot easier if you're going to building GitHub Pages sites locally. If you don't alreay have Bundler installed, you can isntall it by running the command 'gem install bundler'.
+  After installing bundler, you run bundle init to initiate a file named GemFile in your repository root directory,
+   $ bundle init
+  open Gemfile and add the line [gem 'github-pages'], and run 'bundle install'.
+
+7 Running Jekyll
+  To run Jekyll in a way that matches the GitHub Pages build server, run Jekyll with Bundler. Use the command [bundle exec jekyll serve] in the root of your repository(after swiching to the gh-pages branch for project reppositories), and your site should be avaiable at [http;//localhost:4000].For a full list if Jekyll commands, ser the Jekyll documentation.
+
+
